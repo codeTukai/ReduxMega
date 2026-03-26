@@ -48,7 +48,7 @@ export class Service{
             }
         )
     } catch (error) {
-        
+        throw error
     }
    }
 
@@ -84,7 +84,7 @@ export class Service{
    async getAllPost(queries = [Query.equal("status", "active")]){
     try {
         return await this.databases.listDocuments(
-            conf,appwriteProjectDatabaseId,
+            conf.appwriteProjectDatabaseId,
             conf.appwriteProjectCollectionId,
             queries
         )
