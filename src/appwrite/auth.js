@@ -32,7 +32,7 @@ export class AuthService {
         
     }
 
-    async login({email, password}){
+    async login({email, password}){ //******* seen this before finalize ******/
         return await this.account.createEmailPasswordSession(email, password);
     }
 
