@@ -13,11 +13,14 @@ const Input = React.forwardRef(function Input({
         <div className='w-full'>
             {label && <label
                 className='inline-block mb-1 pl-1'
+                // accessibility
                 htmlFor={id}>
 
                 {label}
 
-            </label>}
+            </label>
+            
+           }
 
             <input
                 type={type}

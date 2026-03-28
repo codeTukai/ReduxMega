@@ -42,7 +42,7 @@ function Header() {
   return (
    <header className='py-3 shadow bg-gray-500'>
      <Container>
-      <nav>
+      <nav className='flex'>
         <div className='mr-4'>
           <Link to='/'>
           <Logo width = '70px' />
@@ -51,7 +51,10 @@ function Header() {
         <ul className='flex ml-auto'>
           {navItems.map((item)=>
           item.active ? (
-            <li key={item.name}>
+            <li key={item.name}> 
+
+            {/* je html  element ta repeat ho66a okhane key lagate hbe*/}
+
               <button onClick={()=> navigate(item.slug)}
               className='inline-block px-6 py-2 duration-200 bg-blue-100 rounded-full'
               >
@@ -62,6 +65,7 @@ function Header() {
           
           )}
           {authStatus && (
+            // if authStatus is true then show the log out button
             <li>
               <LogoutBtn />
             </li>
