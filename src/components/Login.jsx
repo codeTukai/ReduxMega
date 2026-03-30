@@ -4,16 +4,16 @@ import { logIn as authLogin } from '../store/authSlice'
 import {Button, Input, Logo} from './index'
 import { useDispatch } from 'react-redux'
 import authService from '../appwrite/auth'
-import {set, useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 
 function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [error, setError] = useState("")
-    const [register, handleSubmit] = useForm()
+    const {register, handleSubmit} = useForm()
 
     const login = async(data)=>{
-        console.log(data);
+        // console.log(data);
         
         setError("")
         try {
@@ -53,6 +53,7 @@ function Login() {
                 {...register("email", {
                     require: true,
                     validate: {
+                      //from regExr put pattern validate is optional
                         matchPattern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                         "Email address must be a valid address",
                     }
