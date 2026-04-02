@@ -1,79 +1,57 @@
 import React from 'react'
-import { Container, Logo, LogoutBtn } from '../index'
-import Link from 'react-router-dom'
+import { Container, Logo, LogOutBtn } from '../index'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-
 
 function Header() {
-
-  const authStatus = useSelector((state)=> state.auth.status)
-
+  const authStatus = useSelector((state) => state.auth.status)
   const navigate = useNavigate()
 
   const navItems = [
-    {
-      name: 'Home',
-      slug: "/",
-      active: true
-    },
-    {
-      name: "Login",
-      slug: "/login",
-      active: !authStatus,
-  },
-  {
-      name: "Signup",
-      slug: "/signup",
-      active: !authStatus,
-  },
-  {
-      name: "All Posts",
-      slug: "/all-posts",
-      active: authStatus,
-  },
-  {
-      name: "Add Post",
-      slug: "/add-post",
-      active: authStatus,
-  },
+    { name: 'Home', slug: "/", active: true },
+    { name: "Login", slug: "/login", active: !authStatus },
+    { name: "Signup", slug: "/signup", active: !authStatus },
+    { name: "All Posts", slug: "/all-posts", active: authStatus },
+    { name: "Add Post", slug: "/add-post", active: authStatus },
   ]
 
   return (
-   <header className='py-3 shadow bg-gray-500'>
-     <Container>
-      <nav className='flex'>
-        <div className='mr-4'>
-          <Link to='/'>
-          <Logo width = '70px' />
-          </Link>
-        </div>
-        <ul className='flex ml-auto'>
-          {navItems.map((item)=>
-          item.active ? (
-            <li key={item.name}> 
-
-            {/* je html  element ta repeat ho66a okhane key lagate hbe*/}
-
-              <button onClick={()=> navigate(item.slug)}
-              className='inline-block px-6 py-2 duration-200 bg-blue-100 rounded-full'
-              >
-                {item.name}
-              </button>
-            </li>
-          ) : null
+    <header className='bg-gray-900 border-b border-gray-700'>
+      <Container>
+        
+        {/* 🔥 FIXED NAV */}
+        <nav className='flex items-center justify-between py-4'>
           
-          )}
-          {authStatus && (
-            // if authStatus is true then show the log out button
-            <li>
-              <LogoutBtn />
-            </li>
-          )}
-        </ul>
-      </nav>
-     </Container>
-   </header>
+          {/* LEFT: Logo */}
+          <Link to="/" className="flex items-center">
+            <Logo width='80px' />
+          </Link>
+
+          {/* RIGHT: Nav Items */}
+          <ul className='flex items-center gap-6'>
+            {navItems.map((item) =>
+              item.active ? (
+                <li key={item.name}>
+                  <button
+                    onClick={() => navigate(item.slug)}
+                    className='text-gray-300 hover:text-white transition'
+                  >
+                    {item.name}
+                  </button>
+                </li>
+              ) : null
+            )}
+
+            {authStatus && (
+              <li>
+                <LogOutBtn />
+              </li>
+            )}
+          </ul>
+
+        </nav>
+      </Container>
+    </header>
   )
 }
 

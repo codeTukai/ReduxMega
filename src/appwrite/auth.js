@@ -20,7 +20,7 @@ export class AuthService {
           if(userAccount) {
             //call another method
 
-            return this.login(email, password)
+            return this.login({email, password})
 
             }else{
                 return userAccount;
@@ -32,29 +32,36 @@ export class AuthService {
         
     }
 
-    async login({email, password}){ //******* seen this before finalize ******/
+   async login({ email, password }) {
+    try {
         return await this.account.createEmailPasswordSession(email, password);
+    } catch (error) {
+        console.log("Appwrite service :: login :: error", error);
+        throw error;
     }
+}
 
-    async getCurrentUser(){
-        try {
-           return await this.account.get()
-        } catch (error) {
-            console.log("Appwrite service :: getCurrentUser :: error", error);
+   async getCurrentUser() {
+    try {
+        return await this.account.get();
+    } catch (error) {
+        if (error.code === 401) {
+            return null; // user not logged in (normal case)
         }
-
+        console.log("Appwrite service :: getCurrentUser :: error", error);
         return null;
     }
+}
 
-    async logout(){
-        try {
-            await this.account.deleteSessions();
-
-        } catch (error) {
-            console.log("Appwrite service :: logout :: error", error);
-            
-        }
+    async logout() {
+    try {
+        await this.account.deleteSessions();
+        return true;
+    } catch (error) {
+        console.log("Appwrite service :: logout :: error", error);
+        return false;
     }
+}
 }
 
 const authService = new AuthService();
