@@ -6,21 +6,20 @@ const initialState = {
 }
 
 const authSlice = createSlice({
-    name : "auth",
+    name: "auth",
     initialState,
     reducers: {
-        logIn : (state,action)=>{
+        login: (state, action) => {
             state.status = true;
-            action.userData = action.payload.userData;
+            state.userData = action.payload.userData;
         },
-        logout : (state)=>{
+        logout: (state) => {
             state.status = false;
             state.userData = null;
-
         }
-    }
+     }
 })
 
-export const { logIn, logout } = authSlice.actions;
+export const {login, logout} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Login as LoginComponent } from '../components'
+import { login as loginComponent } from '../components'
 
-function Login() {
+function login() {
   return (
     <div className='w-full'>
-        <LoginComponent />
+        <loginComponent />
     </div>
   )
 }
 
-export default Login
+export default login

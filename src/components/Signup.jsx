@@ -3,7 +3,7 @@ import authService from "../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { logIn } from "../store/authSlice";
+import { login } from "../store/authSlice";
 import { Button, Input, Logo } from "./index";
 
 function Signup() {
@@ -19,7 +19,7 @@ function Signup() {
       if (userData) {
         const userData = await authService.getCurrentUser();
 
-        if (userData) dispatch(logIn(userData));
+        if (userData) dispatch(login(userData));
         navigate("/");
       }
     } catch (error) {

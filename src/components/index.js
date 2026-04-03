@@ -6,7 +6,7 @@ import LogOutBtn from './Header/LogOutBtn'
 import RTE from './RTE'
 import Signup from './Signup'
 import PostForm from "./post-form/PostForm";
-import Login from "../pages/Login";
+import Login from "./Login";
 import PostCard from './PostCard'
 import AuthLayout from './AuthLayout'
 import Input from './Input'
